@@ -33,7 +33,7 @@ def _run_test_with_standard_adder(test_func):
     adder = StandardAdder()
     return test_func(adder)
     
-StandardAdderTests = adder_tests.create(
+StandardAdderTests = adder_test_set.create(
     "StandardAdderTests",
     _run_test_with_standard_adder
 )
