@@ -42,5 +42,6 @@ StandardAdderTests = adder_tests.create(
 The first argument to `create` should be the name of the concrete test set.
 The second argument is a function that can run each of the test functions.
 In the example above, to run the test `adding_zero_to_zero_returns_zero` for
-`StandardAdder`, we call `_run_test_with_standard_adder(adding_zero_to_zero_returns_zero)`.
+`StandardAdder`, nose-test-sets ends up calling
+`_run_test_with_standard_adder(adding_zero_to_zero_returns_zero)`.
 
