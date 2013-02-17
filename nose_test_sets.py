@@ -1,5 +1,4 @@
 import functools
-import contextlib
 
 from nose.tools import istest, nottest
 
@@ -12,24 +11,22 @@ class TestSetBuilder(object):
     def add_test(self, func):
         self._test_funcs.append(func)
         
-    def create(self, name, *arg_builders):
+    def create(self, name, run_test):
         @istest
         class Tests(object):
             pass
             
         for test_func in self._test_funcs:
-            self._add_test_func(Tests, test_func, arg_builders)
+            self._add_test_func(Tests, test_func, run_test)
         
         Tests.__name__ = name
         return Tests
         
-    def _add_test_func(self, cls, test_func, arg_builders):
+    def _add_test_func(self, cls, test_func, run_test):
         @functools.wraps(test_func)
         @istest
-        def run_test(self):
-            # TODO: re-implement nested more robustly
-            with contextlib.nested(*map(apply, arg_builders)) as args:
-                test_func(*args)
+        def test_method(self):
+            return run_test(test_func)
         
-        setattr(cls, test_func.__name__, run_test)
+        setattr(cls, test_func.__name__, test_method)
 
