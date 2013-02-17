@@ -20,6 +20,10 @@ test = test_set_builder.add_test
 def adding_zero_to_zero_returns_zero(adder):
     assert adder.add(0, 0) == 0
     
+@test
+def adding_one_to_two_returns_three(adder):
+    assert adder.add(1, 2) == 3
+    
 create = test_set_builder.create
 ```
 
@@ -41,7 +45,8 @@ StandardAdderTests = adder_test_set.create(
 
 The first argument to `create` should be the name of the concrete test set.
 The second argument is a function that can run each of the test functions.
-In the example above, to run the test `adding_zero_to_zero_returns_zero` for
-`StandardAdder`, nose-test-sets ends up calling
-`_run_test_with_standard_adder(adding_zero_to_zero_returns_zero)`.
+In the example above, to run the tests in `StandardAdderTests`, nose-test-sets
+ends up calling
+`_run_test_with_standard_adder(adding_zero_to_zero_returns_zero)` and
+`_run_test_with_standard_adder(adding_one_to_two_returns_three)`.
 
