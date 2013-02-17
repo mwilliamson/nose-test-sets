@@ -21,7 +21,6 @@ def adding_zero_to_zero_returns_zero(adder):
     assert adder.add(0, 0) == 0
     
 create = test_set_builder.create
-    
 ```
 
 To run the tests against a specific implementation, you create a set of tests
