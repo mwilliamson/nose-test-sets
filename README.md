@@ -8,7 +8,7 @@
 
 To define your set of common tests, create a `TestSetBuilder`, and use
 `add_test` to add tests. Each test should accept the same name of arguments.
-Say you define some tests for an adder in the module `adder_tests`:
+Say you define some tests for an adder in the module `adder_test_set`:
 
 ```python
 from nose_test_sets import TestSetBuilder
@@ -27,7 +27,7 @@ To run the tests against a specific implementation, you create a set of tests
 using the `create` function that we defined above:
 
 ```python
-import adder_tests
+import adder_test_set
 
 def _run_test_with_standard_adder(test_func):
     adder = StandardAdder()
