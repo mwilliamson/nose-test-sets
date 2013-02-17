@@ -6,7 +6,7 @@ from distutils.core import setup
 
 setup(
     name='nose-test-sets',
-    version='0.2.0',
+    version='0.2.1',
     description='Create test sets to test different implementations of the same interface',
     author='Michael Williamson',
     url='http://github.com/mwilliamson/spur.py',

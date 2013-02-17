@@ -14,8 +14,9 @@ Say you define some tests for an adder in the module `common_tests`:
 from nose_test_sets import TestSetBuilder
 
 test_set_builder = TestSetBuilder()
+test = test_set_builder.add_test
 
-@test_set_builder.add_test
+@test
 def adding_zero_to_zero_returns_zero(adder):
     assert adder.add(0, 0) == 0
     
@@ -27,17 +28,20 @@ To run the tests against a specific implementation, you create a set of tests
 using the `create` function that we defined above:
 
 ```python
-import contextlib
-
 import adder_tests
 
-@contextlib.contextmanager
-def create_adder():
-    return StandardAdder()
+def _run_test_with_standard_adder(test_func):
+    adder = StandardAdder()
+    return test_func(adder)
     
-StandardAdder = adder_tests.create("StandardAdder", create_adder)
+StandardAdderTests = adder_tests.create(
+    "StandardAdderTests",
+    _run_test_with_standard_adder
+)
 ```
 
 The first argument to `create` should be the name of the concrete test set.
-Any further arguments should be context managers that supply the arguments
-that will be used by each test.
+The second argument is a function that can run each of the test functions.
+In the example above, to run the test `adding_zero_to_zero_returns_zero` for
+`StandardAdder`, we call `_run_test_with_standard_adder(adding_zero_to_zero_returns_zero)`.
+
